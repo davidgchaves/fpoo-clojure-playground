@@ -47,3 +47,25 @@
     (shift this (x that) (y that))))
 
 (add-shift (Point 10 50) (Point 20 100))
+
+;; Make -> A constructor-like functions
+(def make
+  (fn [type & args]
+    (apply type args)))
+
+(make Point 4 6)
+
+;; A Triangle
+(def Triangle
+  (fn [p1 p2 p3]
+    {:point1 p1,
+     :point2 p2,
+     :point3 p3
+     :__class_symbol__ 'Triangle}))
+
+;; Make works with Triangles too
+(make Triangle
+      (make Point 1 2)
+      (make Point 1 3)
+      (make Point 3 1))
+
