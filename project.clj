@@ -4,4 +4,4 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]]
-  :repl-options {:init-ns fp-oo-playground.03-add-and-make})
+  :repl-options {:init-ns fp-oo-playground.04-embedded-functions})
