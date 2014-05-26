@@ -23,11 +23,27 @@
 (y (Point 1 2))
 (class-of (Point 1 2))
 
-;; A shift method -> Takes a particular point
-;;                   and shifts it according to a x- and y-increment
+;; Shift -> Takes a particular point
+;;          Shifts it according to a x- and y-increment
 (def shift
   (fn [this x-inc y-inc]
     (Point (+ (x this) x-inc)
            (+ (y this) y-inc))))
 
 (shift (Point 10 10) 20 200)
+
+;; Add -> Implement an add function that adds two point producing a third
+(def add
+  (fn [this that]
+    (Point (+ (x this) (x that))
+           (+ (y this) (y that)))))
+
+(add (Point 10 50) (Point 20 100))
+
+;; Add -> Implement an add function that adds two point producing a third
+;;        Use the 'shift' function
+(def add-shift
+  (fn [this that]
+    (shift this (x that) (y that))))
+
+(add-shift (Point 10 50) (Point 20 100))
