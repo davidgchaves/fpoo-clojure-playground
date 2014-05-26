@@ -60,7 +60,7 @@
   (fn [p1 p2 p3]
     {:point1 p1,
      :point2 p2,
-     :point3 p3
+     :point3 p3,
      :__class_symbol__ 'Triangle}))
 
 ;; Make works with Triangles too
@@ -69,3 +69,26 @@
       (make Point 1 3)
       (make Point 3 1))
 
+;; Three Triangles
+(def right-triangle (Triangle (Point 0 0)
+                              (Point 0 1)
+                              (Point 1 0)))
+
+(def equal-right-triangle (Triangle (Point 0 0)
+                                    (Point 0 1)
+                                    (Point 1 0)))
+
+(def different-triangle (Triangle (Point 0 0)
+                                  (Point 0 10)
+                                  (Point 10 0)))
+
+;; equal-triangles?
+;; NOTE: In clojure there's no distiction between "pointer equality"
+;;       and "content equality".
+(def equal-triangles? =)
+
+(equal-triangles? right-triangle right-triangle)
+(equal-triangles? right-triangle equal-right-triangle)
+(equal-triangles? right-triangle different-triangle)
+(equal-triangles? right-triangle equal-right-triangle right-triangle)
+(equal-triangles? right-triangle equal-right-triangle different-triangle)
