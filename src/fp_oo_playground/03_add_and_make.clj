@@ -92,3 +92,12 @@
 (equal-triangles? right-triangle different-triangle)
 (equal-triangles? right-triangle equal-right-triangle right-triangle)
 (equal-triangles? right-triangle equal-right-triangle different-triangle)
+
+
+;; valid-triangle?
+(def valid-triangle?
+  (fn [& points]
+     (= (distinct points) points)))
+
+(valid-triangle? (Point 1 2) (Point 3 5) (Point 1 2))
+(valid-triangle? (Point 1 2) (Point 3 5) (Point 7 9))
