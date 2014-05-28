@@ -18,7 +18,9 @@
 
 (def apply-message-to
   (fn [class instance message args]
-    (apply (method-from-message message class) instance args)))
+    (let [method (or (method-from-message message class)
+                     message)]
+      (apply method instance args))))
 
 ;; Refactor version (using apply-message-to)
 (def make
@@ -56,3 +58,15 @@
 (def point (make Point 1 2))
 (send-to point :class-name)
 (send-to point :class)
+
+(def Holder
+  {
+   :__own_symbol__ 'Holder
+   :__instance_methods__
+   {
+    :add-instance-values (fn [this held]
+                           (assoc this :held held))
+    }
+   })
+
+(send-to (make Holder "stuff") :held)
