@@ -7,12 +7,6 @@
           constructor (:add-instance-values (:__instance_methods__ class))]
       (apply constructor seeded args))))
 
-(def send-to
-  (fn [instance message & args]
-    (let [class  (eval (:__class_symbol__ instance))
-          method (message (:__instance_methods__ class))]
-     (apply method instance args))))
-
 (def Point
   {
    :__own_symbol__ 'Point
@@ -29,12 +23,15 @@
     }
    })
 
-
+;; Helpers
 (def method-from-message
   (fn [message class]
     (message (:__instance_methods__ class))))
 
-;; Refactor version (using method-from-message)
+(def class-from-instance
+  (fn [instance]
+    (eval (:__class_symbol__ instance))))
+
 (def apply-message-to
   (fn [class instance message args]
     (apply (method-from-message message class) instance args)))
@@ -47,5 +44,10 @@
   (fn [class & args]
     (let [seeded {:__class_symbol__ (:__own_symbol__ class)}]
       (apply-message-to class seeded :add-instance-values args))))
+
+;; Refactor version (using method-from-message and class-from-instance)
+(def send-to
+  (fn [instance message & args]
+    (apply-message-to (class-from-instance instance) instance message args)))
 
 (send-to (make Point 1 2) :shift -2 -3)
