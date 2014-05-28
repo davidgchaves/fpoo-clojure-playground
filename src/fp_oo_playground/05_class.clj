@@ -36,3 +36,12 @@
    })
 
 (send-to (make Point 1 2) :shift -2 -3)
+
+;; Raw version
+(def apply-message-to
+  (fn [class instance message args]
+    (let [method (message (:__instance_methods__ class))]
+      (apply method instance args))))
+
+(def a-point (make Point 5 5))
+(apply-message-to Point a-point :shift [1 333])
