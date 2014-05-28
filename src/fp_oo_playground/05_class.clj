@@ -36,7 +36,9 @@
    :__own_symbol__ 'Point
    :__instance_methods__
    {
-    :class :__class_symbol__
+    :class-name :__class_symbol__
+
+    :class (fn [this] (class-from-instance this))
 
     :add-instance-values (fn [this x y]
                            (assoc this :x x :y y))
@@ -50,3 +52,7 @@
 (def a-point (make Point 5 5))
 (apply-message-to Point a-point :shift [1 333])
 (send-to (make Point 1 2) :shift -2 -3)
+
+(def point (make Point 1 2))
+(send-to point :class-name)
+(send-to point :class)
