@@ -91,3 +91,14 @@
 (factorial-1 0)
 (factorial-1 1)
 (factorial-1 4)
+
+;; factorial-2 using the second recursive pattern
+(def factorial-2
+  (fn [n so-far]
+    (if (or (= n 0) (= n 1))
+      so-far
+      (factorial-2 (dec n) (* n so-far)))))
+
+(factorial-2 0 1)
+(factorial-2 1 1)
+(factorial-2 4 1)
