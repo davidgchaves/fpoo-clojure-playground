@@ -103,25 +103,25 @@
 (factorial-2 1 1)
 (factorial-2 4 1)
 
-;; recursive-function helper
-(def recursive-function
-  (fn [op seq-of-numbers so-far]
-    (if (empty? seq-of-numbers)
+;; custom-reduce helper
+(def custom-reduce
+  (fn [combiner seq-of-something so-far]
+    (if (empty? seq-of-something)
       so-far
-      (recursive-function op
-                          (rest seq-of-numbers)
-                          (op (first seq-of-numbers) so-far)))))
+      (custom-reduce combiner
+                     (rest seq-of-something)
+                     (combiner (first seq-of-something) so-far)))))
 
 ;; add-sequence refactored
 (def add-sequence
   (fn [seq-of-numbers]
-    (recursive-function + seq-of-numbers 0)))
+    (custom-reduce + seq-of-numbers 0)))
 
 (add-sequence [5 50 10 5])
 
 ;; mult-sequence refactored
 (def mult-sequence
   (fn [seq-of-numbers]
-    (recursive-function * seq-of-numbers 1)))
+    (custom-reduce * seq-of-numbers 1)))
 
 (mult-sequence [50 10 5])
