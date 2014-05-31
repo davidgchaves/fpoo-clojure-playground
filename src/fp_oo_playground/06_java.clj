@@ -125,3 +125,18 @@
     (custom-reduce * seq-of-numbers 1)))
 
 (mult-sequence [50 10 5])
+
+;; Task: convert a sequence of keywords into a silly and a non-so silly map
+;; silly-map
+(def into-map
+  (fn [a-keyword a-map]
+    (assoc a-map a-keyword 0)))
+
+(custom-reduce into-map [:a :b :c] {})
+
+;; non-so-silly-map
+(def into-map-with-position
+  (fn [a-keyword a-map]
+    (assoc a-map a-keyword (count a-map))))
+
+(custom-reduce into-map-with-position [:a :b :c] {})
