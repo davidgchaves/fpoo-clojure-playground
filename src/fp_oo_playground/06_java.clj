@@ -80,3 +80,14 @@
 (def send-to
   (fn [instance message & args]
     (apply-message-to (class-from-instance instance) instance message args)))
+
+;; factorial-1 using the first recursive pattern
+(def factorial-1
+  (fn [n]
+    (if (or (= n 0) (= n 1))
+      1
+      (* n (factorial-1 (dec n))))))
+
+(factorial-1 0)
+(factorial-1 1)
+(factorial-1 4)
