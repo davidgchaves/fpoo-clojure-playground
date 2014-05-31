@@ -103,22 +103,25 @@
 (factorial-2 1 1)
 (factorial-2 4 1)
 
-;; add-sequence using the second recursive pattern
+;; recursive-function helper
+(def recursive-function
+  (fn [op seq-of-numbers so-far]
+    (if (empty? seq-of-numbers)
+      so-far
+      (recursive-function op
+                          (rest seq-of-numbers)
+                          (op (first seq-of-numbers) so-far)))))
+
+;; add-sequence refactored
 (def add-sequence
-  (fn [seq-of-numbers so-far]
-    (if (empty? seq-of-numbers)
-      so-far
-      (add-sequence (rest seq-of-numbers)
-                    (+ (first seq-of-numbers) so-far)))))
+  (fn [seq-of-numbers]
+    (recursive-function + seq-of-numbers 0)))
 
-(add-sequence [5 50 10 5] 0)
+(add-sequence [5 50 10 5])
 
-;; mult-sequence using the second recursive pattern
+;; mult-sequence refactored
 (def mult-sequence
-  (fn [seq-of-numbers so-far]
-    (if (empty? seq-of-numbers)
-      so-far
-      (mult-sequence (rest seq-of-numbers)
-                     (* (first seq-of-numbers) so-far)))))
+  (fn [seq-of-numbers]
+    (recursive-function * seq-of-numbers 1)))
 
-(mult-sequence [50 10 5] 1)
+(mult-sequence [50 10 5])
