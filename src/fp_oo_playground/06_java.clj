@@ -128,15 +128,36 @@
 
 ;; Task: convert a sequence of keywords into a silly and a non-so silly map
 ;; silly-map
-(def into-map
+(def into-map-1
   (fn [a-keyword a-map]
     (assoc a-map a-keyword 0)))
 
-(custom-reduce into-map [:a :b :c] {})
+(def into-map-2
+  (fn [a-map a-keyword]
+    (assoc a-map a-keyword 0)))
+
+(custom-reduce into-map-1 [:a :b :c] {})
 
 ;; non-so-silly-map
-(def into-map-with-position
+(def into-map-with-position-1
   (fn [a-keyword a-map]
     (assoc a-map a-keyword (count a-map))))
 
-(custom-reduce into-map-with-position [:a :b :c] {})
+(def into-map-with-position-2
+  (fn [a-map a-keyword]
+    (assoc a-map a-keyword (count a-map))))
+
+(custom-reduce into-map-with-position-1 [:a :b :c] {})
+
+;; reduce vs custom-reduce
+(reduce        + 0 [5 50 10 5])
+(custom-reduce + [5 50 10 5] 0)
+
+(reduce        * 1 [50 10 5])
+(custom-reduce * [50 10 5] 1)
+
+(reduce        into-map-2 {} [:a :b :c])
+(custom-reduce into-map-1 [:a :b :c] {})
+
+(reduce        into-map-with-position-2 {} [:a :b :c])
+(custom-reduce into-map-with-position-1 [:a :b :c] {})
