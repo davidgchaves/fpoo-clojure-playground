@@ -112,3 +112,13 @@
                     (+ (first seq-of-numbers) so-far)))))
 
 (add-sequence [5 50 10 5] 0)
+
+;; mult-sequence using the second recursive pattern
+(def mult-sequence
+  (fn [seq-of-numbers so-far]
+    (if (empty? seq-of-numbers)
+      so-far
+      (mult-sequence (rest seq-of-numbers)
+                     (* (first seq-of-numbers) so-far)))))
+
+(mult-sequence [50 10 5] 1)
