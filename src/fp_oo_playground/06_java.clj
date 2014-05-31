@@ -102,3 +102,13 @@
 (factorial-2 0 1)
 (factorial-2 1 1)
 (factorial-2 4 1)
+
+;; add-sequence using the second recursive pattern
+(def add-sequence
+  (fn [seq-of-numbers so-far]
+    (if (empty? seq-of-numbers)
+      so-far
+      (add-sequence (rest seq-of-numbers)
+                    (+ (first seq-of-numbers) so-far)))))
+
+(add-sequence [5 50 10 5] 0)
